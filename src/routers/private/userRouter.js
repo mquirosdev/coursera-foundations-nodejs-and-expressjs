@@ -1,5 +1,7 @@
 const express = require('express');
-const userRouter = express.Router()
+const mongoose = require('mongoose');
+
+const userRouter = express.Router();
 module.exports = userRouter;
 
 const bodyParserMiddleware = require('../../middleware/bodyParserMiddleware.js');
@@ -7,7 +9,7 @@ const bodyParserMiddleware = require('../../middleware/bodyParserMiddleware.js')
 const UserModel = require("../../models/User.js");
 userRouter.post("/", 
   bodyParserMiddleware.none(),
-  (req, res) => {
+  (req, res, next) => {
     const user = new UserModel(req.body);
     user
       .save()
@@ -15,7 +17,7 @@ userRouter.post("/",
         res.status(200).json({ status: "ok", msg: "action succeeded" });
       })
       .catch(error => {
-        res.status(422).json(Object.values(error.errors).map(e => e.message))
+        next(error)
       })
   }
 )

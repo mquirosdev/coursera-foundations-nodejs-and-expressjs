@@ -23,7 +23,15 @@ app.use((err, _req, res, next) => {
 });
 
 app.use((err, _req, res, next) => {
-  const status = err.status || 500;
-  res.status(status).json({ status: "error", msg: err.message });
+  if(err instanceof mongoose.Error.DocumentNotFoundError) {
+    res.status(404).json({ messages: ["Record not found"] });
+  } else if(err instanceof mongoose.Error.ValidationError) {
+    res.status(422).json({ messages: Object.values(err.errors).map(e => e.message) })
+  } else if(err.constructor.name === "MongoServerError" && err.code === 11000) {
+    res.status(422).json({ messages: [`${Object.keys(err.keyValue).join(',')} already taken`] })
+  } else {
+    const status = err.status || 500;
+    res.status(status).json({ messages: [err.message] });
+  }
 });
 

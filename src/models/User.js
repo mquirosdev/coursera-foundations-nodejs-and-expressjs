@@ -21,8 +21,14 @@ const schema = new mongoose.Schema(
       }
     },
     passwordDigest: { 
-      type: String, 
+      type: String,
+      default: "initial",
       required: [true, "Password is required"]
+    },
+    salt: {
+      type: String,
+      default: "initial",
+      required: [true, "Salt is required"]
     }
   }
 )
@@ -30,9 +36,10 @@ const schema = new mongoose.Schema(
 schema
   .virtual('password')
   .set(function(v) {
-    console.log("Virtual password setter");
     this._password = (typeof v == 'string') ? v.trim() : '';
-    this.passwordDigest = digestPasswordString(v);
+    const [passwordDigest, salt] = digestPasswordString(v);
+    this.passwordDigest = passwordDigest;
+    this.salt = salt;
   });
 
 schema.pre('validate', function() {
