@@ -1,7 +1,7 @@
 const { z } = require('zod');
 
 const User = require('../../models/User.js');
-const { response } = require('express');
+const { UserStatuses } = require('../../constants.js')
 
 const ParamsSchema = z.object({
   name: z.object({
@@ -21,15 +21,18 @@ class UserPresenter {
   }
 
   get values() {
-    return { 
+    return {
+      _id: this.object._id,
       name: this.object.name,
-      email: this.object.email
+      email: this.object.email,
+      status: this.object.status
     }
   }
 }
 
 const createHandler = async (req, res, next) => {
-  const params = await ParamsSchema.parseAsync(req.body);
+  let params = await ParamsSchema.parseAsync(req.body);
+  params = Object.assign(params, { status: "new" });
   const user = new User(params);
   user
     .save()

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
+
 const digestPasswordString = require('../services/digestPasswordString.js');
+const { UserStatuses } = require('../constants.js')
 
 const schema = new mongoose.Schema(
   {
@@ -13,6 +15,11 @@ const schema = new mongoose.Schema(
       index: true,
       unique: true
     },
+    status: {
+      type: String,
+      required: true,
+      enum: UserStatuses,
+    },
     passwordDigest: { 
       type: String,
       required: true
@@ -21,6 +28,9 @@ const schema = new mongoose.Schema(
       type: String,
       required: true
     }
+  },
+  {
+    timestamps: true
   }
 )
 
