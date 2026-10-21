@@ -1,10 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { ZodError } = require('zod');
+const { ZodError, readonly } = require('zod');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 const userRouter = require('./routers/userRouter.js');
+
+// TODO
+// - Ensure the server does not start to listen until the mongo connection is readonly
+// - Move the connection setup and app creating logic to a module named app.js
+// - The body parser just accepts form-data (mutipart). Enable json bodies.
+// - Handle unique index error in mongo. Here
+// - Implement tests.
 
 mongoose
   .connect(`${process.env.MONGODB_URI}/${process.env.MONGODB_DATABASE}`)
