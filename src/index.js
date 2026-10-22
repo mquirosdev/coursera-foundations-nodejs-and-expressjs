@@ -7,19 +7,20 @@ const app = express();
 const userRouter = require('./routers/userRouter.js');
 
 // TODO
-// - Ensure the server does not start to listen until the mongo connection is readonly
-// - Move the connection setup and app creating logic to a module named app.js
 // - The body parser just accepts form-data (mutipart). Enable json bodies.
 // - Handle unique index error in mongo. Here
 // - Implement tests.
 
 mongoose
   .connect(`${process.env.MONGODB_URI}/${process.env.MONGODB_DATABASE}`)
-  .then(function() { console.log("Successfully connected to mongodb"); })
-  .catch(err => { console.log("Connection to mongo failed: ", err) })
+  .then(function() { 
+    console.log("Successfully connected to mongodb");
+    app.listen(PORT, () => console.log("Listen on port: ", PORT))
+  })
+  .catch(err => { 
+    console.log("Connection to mongo failed: ", err);
+  })
   
-app.listen(PORT, () => console.log("Listen on port: ", PORT))
-
 app.use('/users', userRouter)
 
 app.use((err, _req, res, next) => {
