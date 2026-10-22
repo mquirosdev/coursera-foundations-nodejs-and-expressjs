@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { ZodError, readonly } = require('zod');
+const multer = require('multer');
+
+const { ZodError } = require('zod');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -20,11 +22,14 @@ mongoose
   .catch(err => { 
     console.log("Connection to mongo failed: ", err);
   })
+
+app.use(express.json());
   
 app.use('/users', userRouter)
 
+// This catches errors when validating if attached files are valid
 app.use((err, _req, res, next) => {
-  if(err.constructor.name.toString() == "MulterError") {
+  if(err instanceof multer.MulterError) {
     res.status(400).json({ status: "error", msg: err.message });
   } else {
     next(err)
