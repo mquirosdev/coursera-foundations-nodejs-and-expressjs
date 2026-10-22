@@ -12,12 +12,12 @@ userRouter.post("/",
   createHandler
 )
 
-userRouter.put("/verify",
+userRouter.put("/verification/confirm",
   bodyParserMiddleware.none(),
   verifyHandler
 )
 
-userRouter.post("/getVerification",
+userRouter.post("/verification",
   bodyParserMiddleware.none(),
   getVerificationHandler
 )
