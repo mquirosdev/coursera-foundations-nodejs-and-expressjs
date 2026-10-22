@@ -1,7 +1,6 @@
 const { z } = require('zod');
 
 const User = require('../../models/User.js');
-const { UserStatuses } = require('../../constants.js')
 
 const ParamsSchema = z.object({
   name: z.object({

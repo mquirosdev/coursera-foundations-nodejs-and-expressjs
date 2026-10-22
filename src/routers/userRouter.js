@@ -2,6 +2,8 @@ const express = require('express');
 
 const bodyParserMiddleware = require('../middleware/bodyParserMiddleware.js');
 const createHandler = require('../controllers/users/createHandler.js');
+const verifyHandler = require('../controllers/users/verifyHandler.js');
+const getVerificationHandler = require('../controllers/users/getVerificationHandler.js');
 
 const userRouter = express.Router();
 
@@ -10,16 +12,14 @@ userRouter.post("/",
   createHandler
 )
 
-module.exports = userRouter;
+userRouter.put("/verify",
+  bodyParserMiddleware.none(),
+  verifyHandler
+)
 
-// userRouter.get("/:userId", 
-//   bodyParserMiddleware.fields([
-//     { name: 'avatar', maxCount: 1 },
-//     { name: 'avatarTwo', maxCount: 1 }
-//   ]),
-//   (req, res) => {
-//     console.log(req.files);
-//     console.log(req.body);
-//     res.send("User by Id");
-//   }
-// )
+userRouter.post("/getVerification",
+  bodyParserMiddleware.none(),
+  getVerificationHandler
+)
+
+module.exports = userRouter;
