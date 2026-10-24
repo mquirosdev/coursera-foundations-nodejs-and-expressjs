@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import { MulterError } from "multer";
 import { ZodError } from "zod";
 
-import userRouter from "./routers/userRouter";
+import userRouter from "./routers/userRouter.js";
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -43,4 +43,3 @@ app.use((err, _req, res, next) => {
     res.status(status).json({ messages: [err.message] });
   }
 });
-

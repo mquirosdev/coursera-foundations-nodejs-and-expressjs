@@ -2,9 +2,9 @@ import { describe, test, expect, vi, beforeEach } from "vitest";
 import { ZodError } from "zod";
 import { Error } from "mongoose";
 
-import User from "../../../src/models/User";
-import UserVerification from "../../../src/models/UserVerification";
-import getVerificationHandler from "../../../src/controllers/users/getVerificationHandler";
+import User from "../../../src/models/User.js";
+import UserVerification from "../../../src/models/UserVerification.js";
+import getVerificationHandler from "../../../src/controllers/users/getVerificationHandler.js";
 
 describe("When request body is null", () => {
   test("raises ZodError with issues", async () => {

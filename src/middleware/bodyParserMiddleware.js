@@ -1,3 +1,5 @@
-const multer = require('multer');
-bodyParserMiddleware = multer();
-module.exports = bodyParserMiddleware;
+import multer from "multer";
+
+const bodyParserMiddleware = multer();
+
+export default bodyParserMiddleware;

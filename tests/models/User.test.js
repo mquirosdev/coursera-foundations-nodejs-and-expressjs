@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
 import mongoose from "mongoose";
 
-import User from "../../src/models/User";
-import digestPasswordString from "../../src/services/digestPasswordString";
+import User from "../../src/models/User.js";
+import digestPasswordString from "../../src/services/digestPasswordString.js";
 
 
 describe("Empty instantiation", () => {

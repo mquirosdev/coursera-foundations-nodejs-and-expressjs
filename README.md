@@ -23,9 +23,9 @@ SECRET_KEY=your_secret_value
 Keep `.env` and its secret value out of version control. Start the server with automatic restarts when files change:
 
 ```sh
-node --watch --env-file=.env src/index.js
+npm run devServer
 ```
 
 The server uses port `3000` by default; set `PORT` in the environment to use a different port. The MongoDB connection must be available when the server starts.
 
-There is currently no configured `dev` script or test suite in `package.json`; `npm test` is only a placeholder and exits with an error.
+Run the test suite with `npm test`. Tests require a MongoDB instance and use the database configured in `vitest.config.js`.

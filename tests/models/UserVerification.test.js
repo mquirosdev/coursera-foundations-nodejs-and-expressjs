@@ -2,7 +2,7 @@ import { describe, test, expect } from "vitest";
 import mongoose from "mongoose";
 import { randomUUID } from "node:crypto";
 
-import UserVerification from "../../src/models/UserVerification";
+import UserVerification from "../../src/models/UserVerification.js";
 
 describe("Empty instantiation", () => {
   test("does not throw an error", () => {

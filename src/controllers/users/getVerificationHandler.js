@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-import User from '../../models/User';
-import UserVerification from '../../models/UserVerification';
+import User from '../../models/User.js';
+import UserVerification from '../../models/UserVerification.js';
 
 const ParamsSchema = z.object({
   email: z.email()

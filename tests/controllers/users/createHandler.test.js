@@ -1,9 +1,9 @@
 import { describe, test, expect, vi } from "vitest";
 import { ZodError } from "zod";
 
-import createHandler from "../../../src/controllers/users/createHandler";
-import UserPresenter from "../../../src/presenters/UserPresenter";
-import User from "../../../src/models/User";
+import createHandler from "../../../src/controllers/users/createHandler.js";
+import UserPresenter from "../../../src/presenters/UserPresenter.js";
+import User from "../../../src/models/User.js";
 
 
 describe("When request body empty", () => {

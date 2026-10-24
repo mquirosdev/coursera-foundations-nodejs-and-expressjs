@@ -4,8 +4,8 @@
   "description": "",
   "license": "ISC",
   "author": "",
-  "type": "commonjs",
-  "main": "index.js",
+  "type": "module",
+  "main": "src/index.js",
   "scripts": {
     "testCoverage": "vitest run --coverage",
     "test": "vitest run",
