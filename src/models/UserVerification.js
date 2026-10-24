@@ -1,13 +1,13 @@
-const crypto = require('node:crypto');
-const mongoose = require('mongoose');
-const { addMinutes } = require('date-fns');
+import crypto from "node:crypto";
+import { addMinutes } from "date-fns";
+import { Schema, model } from "mongoose";
 
 const VerificationCodeLength = 6;
 const VerificationCodeMinutesTTL = 5;
-const UserVerificationSchema = mongoose.Schema(
+const UserVerificationSchema = Schema(
   {
     uuid: {
-      type: mongoose.Schema.Types.UUID,
+      type: Schema.Types.UUID,
       required: true,
       index: true,
       unique: true
@@ -40,4 +40,4 @@ const UserVerificationSchema = mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('userVerifications', UserVerificationSchema);
+module.exports = model('userVerifications', UserVerificationSchema);

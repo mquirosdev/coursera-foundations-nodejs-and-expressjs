@@ -1,7 +1,7 @@
-const { z } = require('zod');
+import { z } from "zod";
 
-const User = require('../../models/User.js');
-const UserPresenter = require('../../presenters/UserPresenter.js');
+import User from '../../models/User.js';
+import UserPresenter from "../../presenters/UserPresenter.js";
 
 const ParamsSchema = z.object({
   name: z.object({
@@ -15,14 +15,14 @@ const ParamsSchema = z.object({
   password: z.string("required").trim().min(10, { error: "invalid" }),
 }, "invalid_params")
 
-const createHandler = async (req, res, next) => {
+const createHandler = async (req, res) => {
   let params = await ParamsSchema.parseAsync(req.body);
   params = Object.assign(params, { status: "new" });
 
   const user = new User(params);
   await user.save();
 
-  res.status(200).json(new UserPresenter(user).values);
+  res.status(201).json(new UserPresenter(user).values);
 }
 
 module.exports = createHandler

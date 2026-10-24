@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+import { Schema, model } from "mongoose";
 
-const digestPasswordString = require('../services/digestPasswordString.js');
-const { UserStatuses } = require('../constants.js')
+import digestPasswordString from '../services/digestPasswordString.js';
+import { UserStatuses } from "../constants.js";
 
-const schema = new mongoose.Schema(
+const schema = new Schema(
   {
     name: {
       first: { type: String, trim: true },
@@ -43,4 +43,4 @@ schema
     this.salt = salt;
   });
 
-module.exports = mongoose.model('users', schema);
+module.exports = model('users', schema);
