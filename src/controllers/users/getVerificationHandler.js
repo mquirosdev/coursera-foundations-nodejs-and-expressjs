@@ -1,7 +1,7 @@
-const { z } = require('zod');
+import { z } from "zod";
 
-const User = require('../../models/User');
-const UserVerification = require('../../models/UserVerification');
+import User from '../../models/User';
+import UserVerification from '../../models/UserVerification';
 
 const ParamsSchema = z.object({
   email: z.email()
