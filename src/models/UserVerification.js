@@ -1,8 +1,9 @@
-const mongoose = require('mongoose');
 const crypto = require('node:crypto');
+const mongoose = require('mongoose');
+const { addMinutes } = require('date-fns');
 
 const VerificationCodeLength = 6;
-const VerificationCodeTTL = 5 * 60 * 1000; // Five minutes in miliseconds
+const VerificationCodeMinutesTTL = 5;
 const UserVerificationSchema = mongoose.Schema(
   {
     uuid: {
@@ -32,7 +33,7 @@ const UserVerificationSchema = mongoose.Schema(
         let code = [];
         for(let i = 1; i <= VerificationCodeLength; i++) { code.push(Math.floor(Math.random() * 10)); }
         this.code = code.join('');
-        this.expiresAt = (new Date().valueOf() + VerificationCodeTTL);
+        this.expiresAt = addMinutes(new Date(), VerificationCodeMinutesTTL);
         this.uuid = crypto.randomUUID();
       }
     }

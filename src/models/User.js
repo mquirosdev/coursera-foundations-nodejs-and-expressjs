@@ -19,6 +19,7 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
       enum: UserStatuses,
+      default: "new"
     },
     passwordDigest: { 
       type: String,
