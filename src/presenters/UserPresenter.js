@@ -13,4 +13,4 @@ class UserPresenter {
   }
 }
 
-module.exports = UserPresenter;
+export default UserPresenter;

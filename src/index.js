@@ -1,17 +1,12 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const multer = require('multer');
+import express from "express";
+import mongoose from "mongoose";
+import { MulterError } from "multer";
+import { ZodError } from "zod";
 
-const { ZodError } = require('zod');
+import userRouter from "./routers/userRouter";
 
 const PORT = process.env.PORT || 3000;
 const app = express();
-const userRouter = require('./routers/userRouter.js');
-
-// TODO
-// - The body parser just accepts form-data (mutipart). Enable json bodies.
-// - Handle unique index error in mongo. Here
-// - Implement tests.
 
 mongoose
   .connect(`${process.env.MONGODB_URI}/${process.env.MONGODB_DATABASE}`)
@@ -29,7 +24,7 @@ app.use('/users', userRouter)
 
 // This catches errors when validating if attached files are valid
 app.use((err, _req, res, next) => {
-  if(err instanceof multer.MulterError) {
+  if(err instanceof MulterError) {
     res.status(400).json({ status: "error", msg: err.message });
   } else {
     next(err)

@@ -7,7 +7,7 @@ const ParamsSchema = z.object({
   email: z.email()
 });
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   const { email } = await ParamsSchema.parseAsync(req.body);
   const user = await User.findOne({ email, status: "new" }).orFail();
   

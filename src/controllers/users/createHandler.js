@@ -15,7 +15,7 @@ const ParamsSchema = z.object({
   password: z.string("required").trim().min(10, { error: "invalid" }),
 }, "invalid_params")
 
-const createHandler = async (req, res) => {
+export default async (req, res) => {
   let params = await ParamsSchema.parseAsync(req.body);
   params = Object.assign(params, { status: "new" });
 
@@ -24,5 +24,3 @@ const createHandler = async (req, res) => {
 
   res.status(201).json(new UserPresenter(user).values);
 }
-
-module.exports = createHandler

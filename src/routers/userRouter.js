@@ -1,9 +1,9 @@
-const express = require('express');
+import express from "express";
 
-const bodyParserMiddleware = require('../middleware/bodyParserMiddleware.js');
-const createHandler = require('../controllers/users/createHandler.js');
-const verifyHandler = require('../controllers/users/verifyHandler.js');
-const getVerificationHandler = require('../controllers/users/getVerificationHandler.js');
+import bodyParserMiddleware from '../middleware/bodyParserMiddleware.js';
+import createHandler from '../controllers/users/createHandler.js';
+import verifyHandler from "../controllers/users/verifyHandler.js";
+import getVerificationHandler from '../controllers/users/getVerificationHandler.js'
 
 const userRouter = express.Router();
 
@@ -22,4 +22,4 @@ userRouter.post("/verification",
   getVerificationHandler
 )
 
-module.exports = userRouter;
+export default userRouter;

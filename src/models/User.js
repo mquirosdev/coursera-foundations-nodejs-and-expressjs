@@ -43,4 +43,4 @@ schema
     this.salt = salt;
   });
 
-module.exports = model('users', schema);
+export default model('users', schema);

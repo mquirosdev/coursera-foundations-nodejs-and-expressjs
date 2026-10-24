@@ -1,14 +1,14 @@
-const { z } = require('zod');
+import { z } from "zod";
 
-const UserVerification = require('../../models/UserVerification.js');
-const User = require('../../models/User.js');
+import UserVerification from "../../models/UserVerification.js";
+import User from "../../models/User.js";
 
 const ParamsSchema = z.object({
   uuid: z.string().trim().min(1),
   code: z.string().trim().min(1)
 });
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   const { uuid, code } = await ParamsSchema.parseAsync(req.body);
 
   const verification = await UserVerification.findOne({

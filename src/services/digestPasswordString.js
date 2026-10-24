@@ -1,4 +1,4 @@
-const crypto = require('node:crypto');
+import crypto from "node:crypto";
 
 function digestPasswordString(str, salt) {
   if(!salt) salt = crypto.randomBytes(16).toString('hex');
@@ -9,4 +9,4 @@ function digestPasswordString(str, salt) {
   ]
 }
 
-module.exports = digestPasswordString;
+export default digestPasswordString;

@@ -40,4 +40,4 @@ const UserVerificationSchema = Schema(
   }
 );
 
-module.exports = model('userVerifications', UserVerificationSchema);
+export default model('userVerifications', UserVerificationSchema);
